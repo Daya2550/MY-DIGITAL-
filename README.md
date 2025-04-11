@@ -1,10 +1,4 @@
-Great structure! You've combined a detailed academic overview with a professional project `README.md`, and now you're looking to **integrate both** sections — the **"Digital Market Yard System"** academic part with the **"MyDigital" Spring Boot implementation** part — into a single cohesive GitHub README file.
 
-Here’s a **final, integrated `README.md`** that blends both parts seamlessly:
-
----
-
-```markdown
 # MyDigital – Digital Market Yard System
 
 A modern Spring Boot web application designed to digitize traditional agricultural market yard operations. This system connects farmers and merchants on a unified digital platform for crop listing, bidding, secure transactions, and real-time tracking — enhancing transparency, efficiency, and trust.
