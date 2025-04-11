@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Commodity Prices</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table-container {
+            width: 100%;
+            height: 300px;
+            overflow-y: auto; /* Enables vertical scrolling */
+            border: 1px solid #ddd;
+        }
+
+        thead {
+            position: sticky;
+            top: 0;
+            background: #343a40;
+            color: white;
+            z-index: 10;
+        }
+    </style>
+
+    <div class="container mt-5">
+        <h1>Commodity Prices</h1>
+        <div class="table-container">
+            <table class="table table-striped">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Commodity</th>
+                        <th>Kg Price</th>
+                        <th>Quintal Price</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Iterate over the commodities and display each row -->
+                    <tr th:each="commodity : ${commodities}">
+                        <td th:text="${commodity.name}"></td>
+                        <td th:text="${commodity.kgPrice}"></td>
+                        <td th:text="${commodity.quintalPrice}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>

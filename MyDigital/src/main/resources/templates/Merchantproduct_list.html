@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Merchant's Products</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+    <h2>Merchant's Products</h2>
+    <table>
+        <tr>
+            <th>ID</th>
+            <th>Product Name</th>
+            <th>Charges</th>
+            <th>Final Price</th>
+            <th>Weight</th>
+            <th>Variety</th>
+            <th>Quantity</th>
+            <th>Farmer Name</th>
+            <th>Date</th>
+            <th>Remark</th>
+        </tr>
+        <tr th:each="product : ${products}">
+            <td th:text="${product.id}"></td>
+            <td th:text="${product.productname}"></td>
+            <td th:text="${product.charges}"></td>
+            <td th:text="${product.finalPrice}"></td>
+            <td th:text="${product.weight}"></td>
+            <td th:text="${product.variety}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td th:text="${product.farmerName}"></td>
+            <td th:text="${product.date}"></td>
+            <td th:text="${product.remark}"></td>
+        </tr>
+    </table>
+</body>
+</html>

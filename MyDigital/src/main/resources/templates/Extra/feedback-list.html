@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Feedback List</title>
+</head>
+<body>
+    <h2>Feedback List</h2>
+    <a href="/feedback/add">Add Feedback</a>
+    <br><br>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Message</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="feedback : ${feedbacks}">
+                <td th:text="${feedback.id}"></td>
+                <td th:text="${feedback.userName}"></td>
+                <td th:text="${feedback.email}"></td>
+                <td th:text="${feedback.message}"></td>
+                <td>
+                    <a th:href="@{/feedback/edit/{id}(id=${feedback.id})}">Edit</a>
+                    <a th:href="@{/feedback/delete/{id}(id=${feedback.id})}" onclick="return confirm('Are you sure?')">Delete</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <br>
+    <a href="/feedback/deleteAll" onclick="return confirm('Are you sure to delete all feedbacks?')">Delete All</a>
+</body>
+</html>

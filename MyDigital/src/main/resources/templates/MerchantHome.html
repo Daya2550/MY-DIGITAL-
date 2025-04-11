@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Merchant Home</title>
+        <meta content="width=device-width, initial-scale=1.0" name="viewport">
+        <meta content="" name="keywords">
+        <meta content="" name="description">
+
+        <!-- Google Web Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&family=Roboto:wght@400;500;700;900&display=swap" rel="stylesheet"> 
+
+        <!-- Icon Font Stylesheet -->
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css"/>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+
+        <!-- Libraries Stylesheet -->
+        <link rel="stylesheet" href="lib/animate/animate.min.css"/>
+        <link href="lib/lightbox/css/lightbox.min.css" rel="stylesheet">
+        <link href="lib/owlcarousel/assets/owl.carousel.min.css" rel="stylesheet">
+
+
+    
+        <style>
+            body {
+                background-image: url('/images/background.jpg');
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+                background-attachment: fixed;
+                min-height: 100vh;
+            }
+  
+
+           
+        
+            .container {
+                margin-top: 50px;
+            }
+            .card {
+                padding: 20px;
+                border-radius: 10px;
+                background: rgba(255, 255, 255, 0.9);
+                box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+                margin-bottom: 20px;
+            }
+            .table {
+                background-color: rgba(255, 255, 255, 0.9);
+                border-radius: 10px;
+                overflow: hidden;
+            }
+            .btn {
+                border-radius: 5px;
+            }
+            .section-header {
+                background: linear-gradient(45deg, #0F172B, #1a2942);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                margin-bottom: 20px;
+                text-align: center;
+                box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            }
+            .section-header h4, .section-header h2 {
+                color: white !important;
+                margin: 0;
+            }
+            .footer {
+                background: rgba(15, 23, 43, 0.9);
+            }
+            .copyright {
+                background: rgba(15, 23, 43, 0.95);
+            }
+            
+            
+            
+        
+            .bg-breadcrumb {
+                background-image: none !important;
+            }
+        </style>
+
+        <!-- Template Stylesheet -->
+        <link href="/css/style.css" rel="stylesheet">
+       
+    </head>
+
+    <body>
+
+        <!-- Spinner Start -->
+        
+        <!-- Spinner End -->
+
+
+        <div class="container-fluid position-relative p-0">
+            <nav class="navbar navbar-expand-lg navbar-light px-4 px-lg-5 py-3 py-lg-0">
+                <a href="" class="navbar-brand p-0">
+                <!-- Navbar & Hero Start -->
+            <h1 class="text-primary"><i class="fas fa-store me-3"></i>MyDigital</h1>
+                    <!-- <img src="img/logo.png" alt="Logo"> -->
+                </a>
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarCollapse">
+                    <div class="navbar-nav ms-auto py-0">
+                        <a href="/" class="nav-item nav-link active">Home</a>
+                        <a href="/Merchant/products/historys" class="nav-item nav-link">View Todays History</a>
+                        <a href="/Merchant/history/self" class="nav-item nav-link">View History</a>
+                        <a th:href="@{/Merchant/self/edit/{id}(id=${merchantId})}" class="nav-item nav-link">Update Profile</a>
+                        <a  th:href="@{/generate-bill/merchant(merchantId=${merchantId})}" class="nav-item nav-link" download>Download Bill</a>
+                        <a href="/Merchant/logout" class="nav-item nav-link">Logout</a>
+                       
+                        <a href="/Farmer/Contactus" class="nav-item nav-link">Feedback</a>
+                    </div>
+                </div>
+            </nav>
+
+            
+<!-- Merchant Home Heading Start -->
+<div class="container mt-5">
+    <div class="section-header">
+        <h2>Merchant Home</h2>
+    </div>
+</div>
+<!-- Merchant Home Heading End -->
+        <!-- Navbar & Hero End -->
+<!-- Header Start -->
+<div class="container-fluid bg-breadcrumb" style="background-image: url('../static/images/background.jpg'); background-size: cover; background-position: center;">
+    <div class="container text-center py-5" style="max-width: 900px;">
+        <h4 class="text-white display-4 mb-4 wow fadeInDown" data-wow-delay="0.1s">Welcome <span th:text="${merchantName}"></span></h4>
+    </div>
+</div>
+<!-- Header End -->
+
+
+<div class="container">
+    <div class="card shadow">
+        <p><strong>Bidding ID:</strong> <span th:text="${merchantId}"></span></p>
+        <p><strong>Email:</strong> <span th:text="${merchantEmail}"></span></p>
+        <p><strong>Payment:</strong> <span th:text="${payment}"></span></p>
+        <p><strong>Total:</strong> <span th:text="${Total}"></span></p>
+        <div class="d-flex justify-content-center mb-3">
+            <a th:href="@{/Merchant/self/edit/{id}(id=${merchantId})}" class="btn btn-warning me-2">Update Profile</a>
+            <a href="/Merchant/history/self" class="btn btn-primary me-2">View History</a>
+            <a href="/Merchant/products/historys" class="btn btn-primary me-2">View Today History</a>
+            <a href="/Merchant/products/history/downloads" class="btn btn-secondary">Download Today History PDF</a>
+            <a  th:href="@{/generate-bill/merchant(merchantId=${merchantId})}" class="btn btn-secondary" download>Download Bill</a>
+        </div>
+    </div>
+</div>
+
+
+<div class="container mt-4">
+    <div class="card shadow p-3">
+        <h2 class="text-center">Products for Merchant</h2>
+        <table class="table table-striped table-hover">
+            <thead class="table-dark">
+                <tr>
+                    <th>Product Name</th>
+                    <th>Charges</th>
+                    <th>Final Price</th>
+                    <th>Weight</th>
+                    <th>Variety</th>
+                    <th>Quantity</th>
+                    <th>Farmer Name</th>
+                    <th>Date</th>
+                    <th>Remark</th>
+                   
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="product : ${products}">
+                    <td th:text="${product.productname}"></td>
+                    <td th:text="${product.charges}"></td>
+                    <td th:text="${product.finalPrice}"></td>
+                    <td th:text="${product.weight}"></td>
+                    <td th:text="${product.variety}"></td>
+                    <td th:text="${product.quantity}"></td>
+                    <td th:text="${product.farmerName}"></td>
+                    <td th:text="${product.date}"></td>
+                    <td th:text="${product.remark}"></td>
+                    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<style>
+    .table-container {
+        width: 100%;
+        height: 300px;
+        overflow-y: auto; /* Enables vertical scrolling */
+        border: 1px solid #ddd;
+    }
+
+    thead {
+        position: sticky;
+        top: 0;
+        background: #343a40;
+        color: white;
+        z-index: 10;
+    }
+</style>
+
+<div class="container mt-5" style="background-color: #ffffff; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+    <h1>Commodity Prices</h1>
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Commodity</th>
+                    <th>Kg Price</th>
+                    <th>Quintal Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over the commodities and display each row -->
+                <tr th:each="commodity : ${commodities}">
+                    <td th:text="${commodity.name}"></td>
+                    <td th:text="${commodity.kgPrice}"></td>
+                    <td th:text="${commodity.quintalPrice}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<style>
+    .table-container {
+        width: 100%;
+        height: 300px;
+        overflow-y: auto; /* Enables vertical scrolling */
+        border: 1px solid #ddd;
+    }
+
+    thead {
+        position: sticky;
+        top: 0;
+        background: #343a40;
+        color: white;
+        z-index: 10;
+    }
+</style>
+
+<div class="container mt-5" style="background-color: #ffffff; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+    <h1>Commodity Rates Today In Maharashtra.</h1>
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Commodity</th>
+                    <th>Kg Price</th>
+                    <th>Quintal Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over the commodities and display each row -->
+                <tr th:each="commodity : ${commodities}">
+                    <td th:text="${commodity.name}"></td>
+                    <td th:text="${commodity.kgPrice}"></td>
+                    <td th:text="${commodity.quintalPrice}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+<div class="container mt-4" style="background-color: #ffffff; border-radius: 10px; padding: 20px; margin-bottom: 20px;">
+    <h1 class="mb-3">Maharashtra Mandi Bhav Today</h1>
+
+    <div class="table-container">
+        <table class="table table-striped">
+            <thead class="thead-dark">
+                <tr>
+                    <th>District Name</th>
+                    <th>Commodity</th>
+                    <th>Variety</th>
+                    <th>Min. Price</th>
+                    <th>Max. Price</th>
+                    <th>Modal Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="item : ${data}">
+                    <td th:text="${item.name}"></td>
+                    <td th:text="${item.commodity}"></td>
+                    <td th:text="${item.variety}"></td>
+                    <td th:text="${item.minPrice}"></td>
+                    <td th:text="${item.maxPrice}"></td>
+                    <td th:text="${item.modalPrice}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+
+
+
+<div class="container mt-4" style="background-color: #ffffff; border-radius: 10px; padding: 20px; margin-bottom: 20px; border: 2px solid #000;">
+    <h1 class="mb-3">Weather in India (383 Locations)</h1>
+
+    <div class="table-container" style="border: 2px solid #000;">
+        <table style="border: 1px solid #ddd; border-radius: 10px; overflow: hidden; width: 100%; height: 100%; background-color: #ffffff;">
+            <thead>
+                <tr>
+                    <th>City</th>
+                    <th>Temperature</th>
+                    <th>City</th>
+                    <th>Temperature</th>
+                    <th>City</th>
+                    <th>Temperature</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Iterate over each city weather data and display it in rows -->
+                <tr th:each="weather : ${weatherList}">
+                    <td th:text="${weather.city}"></td>
+                    <td th:text="${weather.temperature}"></td>
+                    <td th:text="${weather.weather}"></td>
+                    <td th:text="${weather.wind}"></td>
+                    <td th:text="${weather.humidity}"></td>
+                    <td th:text="${weather.humidity1}"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- Footer Start -->
+        <div class="container-fluid footer py-5 wow fadeIn" data-wow-delay="0.2s">
+            <div class="container py-5 border-start-0 border-end-0" style="border: 1px solid; border-color: rgb(255, 255, 255, 0.08);">
+                <div class="row g-5">
+                    <div class="col-md-6 col-lg-6 col-xl-4">
+                        <div class="footer-item">
+                            <a href="index.html" class="p-0">
+                                <h4 class="text-white">MyDigital</h4>
+                                <!-- <img src="img/logo.png" alt="Logo"> -->
+                            </a>
+                            <p class="mb-4">MyDigital is a platform that allows you to buy and sell products online.</p>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-2">
+                        <div class="footer-item">
+                            <h4 class="text-white mb-4">Quick Links</h4>
+                            <a href="/"><i class="fas fa-angle-right me-2"></i> Homepage</a>
+                            <a href="/Farmer/login"><i class="fas fa-angle-right me-2"></i>farmer</a>
+                            <a href="/Merchant/login"><i class="fas fa-angle-right me-2"></i>Merchant</a>
+                            <a href="/Admin/AdminSign"><i class="fas fa-angle-right me-2"></i> Admin</a>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item">
+                            <h4 class="text-white mb-4">Support</h4>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Privacy Policy</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Terms & Conditions</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Disclaimer</a>
+                            <a href="#"><i class="fas fa-angle-right me-2"></i> Support</a>
+                           
+                        </div>
+                    </div>
+                    <div class="col-md-6 col-lg-6 col-xl-3">
+                        <div class="footer-item">
+                            <h4 class="text-white mb-4">Contact Info</h4>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-map-marker-alt text-primary me-3"></i>
+                                <p class="text-white mb-0">nbnscoe,solpur</p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fas fa-envelope text-primary me-3"></i>
+                                <p class="text-white mb-0">info@example.com</p>
+                            </div>
+                            <div class="d-flex align-items-center">
+                                <i class="fa fa-phone-alt text-primary me-3"></i>
+                                <p class="text-white mb-0">8010094034</p>
+                            </div>
+                            <div class="d-flex">
+                                <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i class="fab fa-facebook-f text-white"></i></a>
+                                <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i class="fab fa-twitter text-white"></i></a>
+                                <a class="btn btn-primary btn-sm-square rounded-circle me-3" href="#"><i class="fab fa-instagram text-white"></i></a>
+                                <a class="btn btn-primary btn-sm-square rounded-circle me-0" href="#"><i class="fab fa-linkedin-in text-white"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Footer End -->
+        
+        <!-- Copyright Start -->
+        <div class="container-fluid copyright py-4">
+            <div class="container">
+                <div class="row g-4 align-items-center">
+                    <div class="col-md-6 text-center text-md-start mb-md-0">
+                        <span class="text-body"><a href="#" class="border-bottom text-white"><i class="fas fa-copyright text-light me-2"></i>MyDigital</a>, All right reserved.</span>
+                    </div>
+                    <div class="col-md-6 text-center text-md-end text-body">
+                        <!--/*** This template is free as long as you keep the below author's credit link/attribution link/backlink. ***/-->
+                        <!--/*** If you'd like to use the template without the below author's credit link/attribution link/backlink, ***/-->
+                        <!--/*** you can purchase the Credit Removal License from "https://htmlcodex.com/credit-removal". ***/-->
+                        Designed By <a class="border-bottom text-white" >MyDigital</a> Distributed By <a class="border-bottom text-white" >DJ</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Copyright End -->
+
+
+        
+
+        
+        <!-- JavaScript Libraries -->
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+   
+ 
+        
+
+        <!-- Template Javascript -->
+        
+        <script src="js/main1.js"></script>
+    </body>
+
+</html>
+

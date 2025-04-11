@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;7 00&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+   
+    <!-- Template Stylesheet -->
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+<style>
+ 
+    .container {
+        background-color: white;
+        border-radius: 10px;
+        padding: 30px;
+        box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        margin-top: 20px;
+    }
+    h2, h3 {
+        color: #2c3e50;
+        border-bottom: 2px solid #3498db;
+        padding-bottom: 10px;
+        margin-bottom: 20px;
+    }
+    .product-info p {
+        margin: 10px 0;
+        padding: 8px;
+        border-radius: 5px;
+        background-color: #f8f9fa;
+    }
+    .product-info strong {
+        color: #2c3e50;
+        min-width: 120px;
+        display: inline-block;
+    }
+    .navigation-buttons {
+        margin: 20px 0;
+    }
+    .btn-custom {
+        background-color: #3498db;
+        color: white;
+        margin: 0 5px;
+        transition: all 0.3s;
+    }
+    .btn-custom:hover {
+        background-color: #2980b9;
+        color: white;
+        transform: translateY(-2px);
+    }
+    .merchant-form {
+        background-color: #f8f9fa;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 20px;
+    }
+    .alert {
+        margin-top: 20px;
+    }
+</style>
+
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="/Admin/AdminHome" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Admin Panel</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <h6 class="text-white">Admin</h6>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="/Admin/AdminHome" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="/Bidding/list" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Transactions</a>
+                    <a href="/Farmer/farmers" class="nav-item nav-link "><i class="fa fa-users me-2"></i>Farmers</a>
+                    <a href="/Merchant/merchants" class="nav-item nav-link"><i class="fa fa-store me-2"></i>Merchants</a>
+                    <a href="/Farmer/products" class="nav-item nav-link"><i class="fa fa-seedling me-2"></i>Farmer Products</a>
+                    <a href="/Merchant/products/admin" class="nav-item nav-link"><i class="fa fa-seedling me-2"></i>Merchant Product</a>
+                    <a href="/Bidding/edit"class="nav-item nav-link "><i class="fa fa-store me-2"></i>Weight</a>
+                    <a href="/Bidding/view" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Bidding</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Stats Start -->
+            
+            <!-- Stats End -->
+
+<div class="container">
+    <h2 class="text-center mb-4">Product Details</h2>
+
+    <div th:if="${product}" class="product-info">
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Product ID:</strong> <span th:text="${product.id}"></span></p>
+                <p><strong>Product Name:</strong> <span th:text="${product.productname}"></span></p>
+                <p><strong>Bidding Status:</strong> <span th:text="${product.bidstatus}"></span></p>
+                <p><strong>Base Price:</strong> <span th:text="${product.basePrice}"></span></p>
+               
+            </div>
+            <div class="col-md-6">
+                <p><strong>Variety:</strong> <span th:text="${product.variety}"></span></p>
+                <p><strong>Quantity:</strong> <span th:text="${product.quantity}"></span></p>
+                <p><strong>Date:</strong> <span th:text="${product.date}"></span></p>
+               
+                <p><strong>Weight:</strong> <span th:text="${product.weight}"></span></p>
+            </div>
+        </div>
+
+        <h3 class="mt-4">Farmer Details</h3>
+        <div class="row">
+            <div class="col-md-6">
+                <p><strong>Farmer Name:</strong> <span th:text="${farmer.MName}"></span></p>
+                <p><strong>Email:</strong> <span th:text="${farmer.MEmail}"></span></p>
+            </div>
+            <div class="col-md-6">
+                <p><strong>Phone:</strong> <span th:text="${farmer.phoneNO}"></span></p>
+                <p><strong>Address:</strong> <span th:text="${farmer.address}"></span></p>
+            </div>
+        </div>
+
+        <div class="merchant-form">
+            <h3>Save Product to Merchant</h3>
+            <form th:action="@{/Bidding/saveToMerchant}" method="post" class="form-inline justify-content-center">
+                <input type="hidden" name="productId" th:value="${product.id}" />
+                <div class="form-group mx-sm-3 mb-2">
+                    <label for="merchantId" class="mr-2">Enter Merchant ID:</label>
+                    <input type="number"  id="merchantId" name="merchantId" required />
+                    <label><strong>finalPrice:</strong></label>
+                    <input type="number" step="10"  name="finalPrice">
+                </div>
+                <button type="submit" class="btn btn-custom mb-2">Save to Merchant</button>
+
+                
+        
+            </form>
+            <div class="text-center mt-3">
+                <p class="h5">Product: <span th:text="${currentIndex}"></span> / <span th:text="${totalProducts}"></span></p>
+            </div>
+
+            <div class="navigation-buttons text-center">
+                <form th:action="@{/Bidding/previous}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-custom">Previous</button>
+                </form>
+
+                <form th:action="@{/Bidding/next}" method="post" style="display:inline;">
+                    <button type="submit" class="btn btn-custom">Next</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div th:if="${message}" class="alert alert-danger" role="alert">
+        <p th:text="${message}"></p>
+    </div>
+</div>
+               
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">My Digital</a>, All Right Reserved. 
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            Designed By My Digital
+                            <br>Distributed By: My Digital
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/js/main.js"></script>
+</body>
+
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+   

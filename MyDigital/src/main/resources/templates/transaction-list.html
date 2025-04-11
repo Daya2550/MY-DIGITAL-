@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+
+    <!-- Favicon -->
+    <link href="/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+   
+    <!-- Template Stylesheet -->
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="/Admin/AdminHome" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Admin Panel</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <h6 class="text-white">Admin</h6>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="/Admin/AdminHome" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="/Bidding/list" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Transactions</a>
+                    <a href="/Farmer/farmers" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Farmers</a>
+                    <a href="/Merchant/merchants" class="nav-item nav-link"><i class="fa fa-store me-2"></i>Merchants</a>
+                    <a href="/Farmer/products" class="nav-item nav-link"><i class="fa fa-seedling me-2"></i>Farmer Products</a>
+                    <a href="/Merchant/products/admin" class="nav-item nav-link"><i class="fa fa-seedling me-2"></i>Merchant Product</a>
+                    <a href="/Bidding/edit" class="nav-item nav-link"><i class="fa fa-store me-2"></i>Weight</a>
+                    <a href="/Bidding/view" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Bidding</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Stats Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-users fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Transactions</p>
+                                <h6 class="mb-0" th:text="${transactions != null ? transactions.size() : 0}">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Stats End -->
+
+            <!-- Table Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Transaction List</h6>
+                        <h5>Total Profits: 
+                            <span th:text="${#aggregates.sum(transactions.![profit])}"></span>
+                        </h5>
+                       
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Farmer Name</th>
+                                    <th>Farmer Phone</th>
+                                    <th>Product</th>
+                                    <th>Farmer Charges</th>
+                                    <th>Final Price</th>
+                                    <th>Weight</th>
+                                    <th>Merchant Name</th>
+                                    <th>Merchant Phone</th>
+                                    <th>Merchant Charges</th>
+                                    <th>Merchant Final Price</th>
+                                    <th>Date</th>
+                                    <th>Profit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="transaction : ${transactions}">
+                                    <td th:text="${transaction.id}"></td>
+                                    <td th:text="${transaction.fName}"></td>
+                                    <td th:text="${transaction.fphoneNO}"></td>
+                                    <td th:text="${transaction.fproductname}"></td>
+                                    <td th:text="${transaction.fcharges}"></td>
+                                    <td th:text="${transaction.ffinalPrice}"></td>
+                                    <td th:text="${transaction.fweight}"></td>
+                                    <td th:text="${transaction.mName}"></td>
+                                    <td th:text="${transaction.mphoneNO}"></td>
+                                    <td th:text="${transaction.mcharges}"></td>
+                                    <td th:text="${transaction.mfinalPrice}"></td>
+                                    <td th:text="${transaction.date}"></td>
+                                    <td th:text="${transaction.profit}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">My Digital</a>, All Right Reserved. 
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            Designed By My Digital
+                            <br>Distributed By: My Digital
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

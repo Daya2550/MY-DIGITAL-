@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="utf-8">
+    <title>Update Product - Admin Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="">
+    <meta name="description" content="">
+
+    <!-- Favicon -->
+    <link rel="icon" href="/img/favicon.ico">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css">
+   
+    <!-- Template Stylesheet -->
+    <link rel="stylesheet" href="/css/main.css">
+    <style>
+        body {
+            background-color: #f8f9fa;
+            font-family: 'Open Sans', sans-serif;
+        }
+        .form-container {
+            background-color: #ffffff;
+            border-radius: 12px;
+            padding: 40px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        .form-container:hover {
+            transform: translateY(-5px);
+        }
+        .form-container h2 {
+            margin-bottom: 30px;
+            color: #343a40;
+            font-weight: 600;
+            font-size: 28px;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            font-weight: 600;
+            color: #495057;
+            margin-bottom: 8px;
+            display: block;
+        }
+        .form-group input, .form-group select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ced4da;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 14px;
+        }
+        .form-group input:focus, .form-group select:focus {
+            border-color: #007bff;
+            box-shadow: 0 0 0 3px rgba(0,123,255,0.1);
+            outline: none;
+        }
+        .btn-success {
+            background-color: #28a745;
+            border: none;
+            padding: 12px 30px;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            margin-top: 20px;
+        }
+        .btn-success:hover {
+            background-color: #218838;
+            transform: translateY(-2px);
+        }
+        .form-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            flex: 1 1 45%;
+        }
+        .sidebar {
+            background: linear-gradient(180deg, #2c3e50, #1a252f);
+        }
+        .content {
+            background: #f8f9fa;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar navbar-dark">
+                <a href="/Admin/AdminHome" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Admin Panel</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <h6 class="text-white">Admin</h6>
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="/Admin/AdminHome" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <div class="content">
+            <div class="container-fluid pt-5 px-5">
+                <div class="row min-vh-100 align-items-center justify-content-center mx-0">
+                    <div class="col-md-8 p-4">
+                        <div class="form-container">
+                            <h2>Update Product Information</h2>
+                            <form action="/Merchant/products/admin/update" method="post" th:object="${product}">
+                                <input type="hidden" name="id" th:value="${product.id}">
+                                
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Product Name:</label>
+                                        <input type="text" name="productname" th:value="${product.productname}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Charges:</label>
+                                        <input type="number" name="charges" th:value="${product.charges}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Final Price:</label>
+                                        <input type="number" name="finalPrice" th:value="${product.finalPrice}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Weight:</label>
+                                        <input type="number" name="weight" th:value="${product.weight}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Variety:</label>
+                                        <input type="text" name="variety" th:value="${product.variety}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Quantity:</label>
+                                        <input type="number" name="quantity" th:value="${product.quantity}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Farmer Name:</label>
+                                        <input type="text" name="farmerName" th:value="${product.farmerName}" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label>Date:</label>
+                                        <input type="date" name="date" th:value="${product.date}" required>
+                                    </div>
+                                </div>
+
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label>Remark:</label>
+                                        <input type="text" name="remark" th:value="${product.remark}">
+                                    </div>
+                                </div>
+
+                                <button type="submit" class="btn btn-success">
+                                    <i class="fas fa-save me-2"></i>Update Product
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">My Digital</a>, All Rights Reserved. 
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            Designed By My Digital<br>Distributed By: My Digital
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Template Javascript -->
+    <script src="/js/main.js"></script>
+</body>
+
+</html>

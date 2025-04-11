@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>Admin Dashboard</title>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <!-- Chart.js Library -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- Favicon -->
+    <link href="/img/favicon.ico" rel="icon">
+
+    <!-- Google Web Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600&family=Roboto:wght@500;700&display=swap" rel="stylesheet"> 
+    
+    <!-- Icon Font Stylesheet -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.10.0/css/all.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css" rel="stylesheet">
+   
+    <!-- Template Stylesheet -->
+    <link href="/css/main.css" rel="stylesheet">
+</head>
+
+<body>
+    <div class="container-fluid position-relative d-flex p-0">
+        <!-- Sidebar Start -->
+        <div class="sidebar pe-4 pb-3">
+            <nav class="navbar bg-secondary navbar-dark">
+                <a href="/Admin/AdminHome" class="navbar-brand mx-4 mb-3">
+                    <h3 class="text-primary"><i class="fa fa-user-edit me-2"></i>Admin Panel</h3>
+                </a>
+                <div class="d-flex align-items-center ms-4 mb-4">
+                    <div class="position-relative">
+                        <h6 class="text-white">Admin</h6>
+                    </div>
+                </div>
+                <div class="navbar-nav w-100">
+                    <a href="/Admin/AdminHome" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
+                    <a href="/Bidding/list" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Transactions</a>
+                    <a href="/Farmer/farmers" class="nav-item nav-link"><i class="fa fa-users me-2"></i>Farmers</a>
+                    <a href="/Merchant/merchants" class="nav-item nav-link"><i class="fa fa-store me-2"></i>Merchants</a>
+                    <a href="/Farmer/products" class="nav-item nav-link"><i class="fa fa-seedling me-2"></i>Farmer Products</a>
+                    <a href="/Merchant/products/admin" class="nav-item nav-link"><i class="fa fa-seedling me-2"></i>Merchant Product</a>
+                    <a href="/Bidding/edit" class="nav-item nav-link"><i class="fa fa-store me-2"></i>Weight</a>
+                    <a href="/Bidding/view" class="nav-item nav-link"><i class="fa fa-tachometer-alt me-2"></i>Bidding</a>
+                </div>
+            </nav>
+        </div>
+        <!-- Sidebar End -->
+
+        <!-- Content Start -->
+        <div class="content">
+            <!-- Stats Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="row g-4">
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-users fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Farmers</p>
+                                <h6 class="mb-0" th:text="${farmers.size()}">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-store fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Merchants</p>
+                                <h6 class="mb-0" th:text="${merchants.size()}">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-seedling fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Products</p>
+                                <h6 class="mb-0" th:text="${products.size()}">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-xl-3">
+                        <div class="bg-secondary rounded d-flex align-items-center justify-content-between p-4">
+                            <i class="fa fa-exchange-alt fa-3x text-primary"></i>
+                            <div class="ms-3">
+                                <p class="mb-2">Total Transactions</p>
+                                <h6 class="mb-0" th:text="${transactions.size()}">0</h6>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Stats End -->
+
+            <!-- Table Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Farmer List</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Password</th>
+                                    <th>Email</th>
+                                    <th>Phone</th>
+                                    <th>Address</th>
+                                    <th>Account No</th>
+                                    <th>Document</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="farmer : ${farmers}">
+                                    <td th:text="${farmer.id}"></td>
+                                    <td th:text="${farmer.MName}"></td>
+                                    <td th:text="${farmer.password}"></td>
+                                    <td th:text="${farmer.MEmail}"></td>
+                                    <td th:text="${farmer.phoneNO}"></td>
+                                    <td th:text="${farmer.address}"></td>
+                                    <td th:text="${farmer.BankAccountNO}"></td>
+                                    <td th:text="${farmer.document}"></td>
+                                    <td class="actions">
+                                        <a th:href="@{/Farmer/admin/edit/{id}(id=${farmer.id})}" class="btn btn-info m-2">Edit</a>
+                                        <form th:action="@{/Farmer/delete/{id}(id=${farmer.id})}" method="post" style="display: inline;" 
+                                              onsubmit="return confirm('Are you sure you want to delete this farmer?');">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+
+             <!-- Table Start -->
+             <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Farmer Product List</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Product Name</th>
+                                    <th>Price Details</th>
+                                    <th>Product Details</th>
+                                    <th>Farmer Info</th>
+                                    <th>Date</th>
+                                    <th>Remark</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="product : ${products}">
+                                    <td th:text="${product.id}"></td>
+                                    <td th:text="${product.productname}"></td>
+                                    <td>
+                                        <div>Base Price: <span th:text="${product.basePrice}"></span></div>
+                                        <div>Final Price: <span th:text="${product.finalPrice}"></span></div>
+                                        <div>Charges: <span th:text="${product.charges}"></span></div>
+                                        <div>Total Pay: <span th:text="${product.Totalpay}"></span></div>
+                                    </td>
+                                    <td>
+                                        <div>Weight: <span th:text="${product.weight}"></span></div>
+                                        <div>Quantity: <span th:text="${product.quantity}"></span></div>
+                                        <div>Variety: <span th:text="${product.variety}"></span></div>
+                                        <div>Bid Status: <span th:text="${product.bidstatus}"></span></div>
+                                    </td>
+                                    <td th:text="${product.farmerName}"></td>
+                                    <td th:text="${product.date}"></td>
+                                    <td th:text="${product.remark}"></td>
+                                    <td class="actions">
+                                        <a th:href="@{/Farmer/products/admin/edit/{id}(id=${product.id})}" class="btn btn-info m-2">Edit</a>
+                                        <form th:action="@{/Farmer/products/delete/{id}(id=${product.id})}" method="post" style="display: inline;" 
+                                              onsubmit="return confirm('Are you sure you want to delete this product?');">
+                                            <button type="submit" class="btn btn-danger">Delete</button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+
+              <!-- Table Start -->
+              <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Farmer History List</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Product Name</th>
+                                    <th>Price Details</th>
+                                    <th>Product Details</th>
+                                    <th>Farmer Info</th>
+                                    <th>Date</th>
+                                    <th>Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="hproduct : ${hproducts}">
+                                    <td th:text="${hproduct.id}"></td>
+                                    <td th:text="${hproduct.productname}"></td>
+                                    <td>
+                                        <div>Base Price: <span th:text="${hproduct.basePrice}"></span></div>
+                                        <div>Final Price: <span th:text="${hproduct.finalPrice}"></span></div>
+                                        <div>Charges: <span th:text="${hproduct.charges}"></span></div>
+                                        <div>Total Pay: <span th:text="${hproduct.Totalpay}"></span></div>
+                                    </td>
+                                    <td>
+                                        <div>Weight: <span th:text="${hproduct.weight}"></span></div>
+                                        <div>Quantity: <span th:text="${hproduct.quantity}"></span></div>
+                                        <div>Variety: <span th:text="${hproduct.variety}"></span></div>
+                                        <div>Bid Status: <span th:text="${hproduct.bidstatus}"></span></div>
+                                    </td>
+                                    <td th:text="${hproduct.farmerName}"></td>
+                                    <td th:text="${hproduct.date}"></td>
+                                    <td th:text="${hproduct.remark}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+
+
+
+
+            <!-- Table Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Merchant List</h6>
+                        <a th:href="@{/Merchant/merchants}">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Phone No</th>
+                                    <th>Address</th>
+                                    <th>Bank Account No</th>
+                                    <th>Payment Status</th>
+                                    <th>Total Pay</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="merchant : ${merchants}">
+                                    <td th:text="${merchant.id}"></td>
+                                    <td th:text="${merchant.MName}"></td>
+                                    <td th:text="${merchant.MEmail}"></td>
+                                    <td th:text="${merchant.phoneNO}"></td>
+                                    <td th:text="${merchant.address}"></td>
+                                    <td th:text="${merchant.BankAccountNO}"></td>
+                                    <td th:text="${merchant.Mpayment}"></td>
+                                    <td th:text="${merchant.Totalpay}"></td>
+                                    <td>
+                                        <a th:href="@{/Merchant/edit/{id}(id=${merchant.id})}" class="btn btn-info m-2">Edit</a>
+                                        <form th:action="@{/Merchant/delete/{id}(id=${merchant.id})}" method="post" style="display:inline-block;">
+                                            <button type="submit" class="btn btn-danger btn-sm" 
+                                                    onclick="return confirm('Are you sure you want to delete this merchant?')">
+                                                Delete
+                                            </button>
+                                        </form>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+
+              <!-- Table Start -->
+              <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Merchant Product List</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Product Name</th>
+                                    <th>Charges</th>
+                                    <th>Final Price</th>
+                                    <th>Weight</th>
+                                    <th>Variety</th>
+                                    <th>Quantity</th>
+                                    <th>Farmer Name</th>
+                                    <th>Date</th>
+                                    <th>Remark</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="mproduct : ${mproducts}">
+                                    <td th:text="${mproduct.id}"></td>
+                                    <td th:text="${mproduct.productname}"></td>
+                                    <td th:text="${mproduct.charges}"></td>
+                                    <td th:text="${mproduct.finalPrice}"></td>
+                                    <td th:text="${mproduct.weight}"></td>
+                                    <td th:text="${mproduct.variety}"></td>
+                                    <td th:text="${mproduct.quantity}"></td>
+                                    <td th:text="${mproduct.farmerName}"></td>
+                                    <td th:text="${mproduct.date}"></td>
+                                    <td th:text="${mproduct.remark}"></td>
+                                    <td>
+                                        <a th:href="@{/Merchant/products/admin/edit/{id}(id=${mproduct.id})}" class="btn btn-info m-2">Edit</a>
+                                        <a th:href="@{/Merchant/products/admin/delete/{id}(id=${mproduct.id})}" class="btn btn-danger btn-sm"
+                                           onclick="return confirm('Are you sure you want to delete this product?');">Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+
+            
+
+
+
+             <!-- Table Start -->
+             <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Merchant History List</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Product Name</th>
+                                    <th>Charges</th>
+                                    <th>Final Price</th>
+                                    <th>Weight</th>
+                                    <th>Variety</th>
+                                    <th>Quantity</th>
+                                    <th>Farmer Name</th>
+                                    <th>Date</th>
+                                    <th>Remark</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="hmproduct : ${hmproducts}">
+                                    <td th:text="${hmproduct.id}"></td>
+                                    <td th:text="${hmproduct.productname}"></td>
+                                    <td th:text="${hmproduct.charges}"></td>
+                                    <td th:text="${hmproduct.finalPrice}"></td>
+                                    <td th:text="${hmproduct.weight}"></td>
+                                    <td th:text="${hmproduct.variety}"></td>
+                                    <td th:text="${hmproduct.quantity}"></td>
+                                    <td th:text="${hmproduct.farmerName}"></td>
+                                    <td th:text="${hmproduct.date}"></td>
+                                    <td th:text="${hmproduct.remark}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+
+
+
+
+
+
+
+
+
+
+
+             <!-- Table Start -->
+             <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Transaction List</h6>
+                        <a href="">Show All</a>
+                    </div>
+                    <!-- Total Profits Display -->
+                    <div class="mb-3">
+                        <h5>Total Profits: 
+                            <span th:text="${#aggregates.sum(transactions.![profit])}"></span>
+                        </h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table table-dark">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Farmer Name</th>
+                                    <th>Farmer Phone</th>
+                                    <th>Product</th>
+                                    <th>Farmer Charges</th>
+                                    <th>Final Price</th>
+                                    <th>Weight</th>
+                                    <th>Merchant Name</th>
+                                    <th>Merchant Phone</th>
+                                    <th>Merchant Charges</th>
+                                    <th>Merchant Final Price</th>
+                                    <th>Date</th>
+                                    <th>Profit</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="transaction : ${transactions}">
+                                    <td th:text="${transaction.id}"></td>
+                                    <td th:text="${transaction.fName}"></td>
+                                    <td th:text="${transaction.fphoneNO}"></td>
+                                    <td th:text="${transaction.fproductname}"></td>
+                                    <td th:text="${transaction.fcharges}"></td>
+                                    <td th:text="${transaction.ffinalPrice}"></td>
+                                    <td th:text="${transaction.fweight}"></td>
+                                    <td th:text="${transaction.mName}"></td>
+                                    <td th:text="${transaction.mphoneNO}"></td>
+                                    <td th:text="${transaction.mcharges}"></td>
+                                    <td th:text="${transaction.mfinalPrice}"></td>
+                                    <td th:text="${transaction.date}"></td>
+                                    <td th:text="${transaction.profit}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <!-- Table End -->
+
+
+
+            
+            <!-- Feedback Table Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary text-center rounded p-4">
+                    <div class="d-flex align-items-center justify-content-between mb-4">
+                        <h6 class="mb-0">Feedback List</h6>
+                    </div>
+
+                    <div class="table-responsive">
+                        <table class="table table-dark table-striped">
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Name</th>
+                                    <th>Email</th>
+                                    <th>Message</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="feedback : ${feedbacks}">
+                                    <td th:text="${feedback.id}"></td>
+                                    <td th:text="${feedback.userName}"></td>
+                                    <td th:text="${feedback.email}"></td>
+                                    <td th:text="${feedback.message}"></td>
+                                    <td>
+                                        <a th:href="@{/feedback/edit/{id}(id=${feedback.id})}" class="btn btn-info btn-sm m-1">Edit</a>
+                                        <a th:href="@{/feedback/delete/{id}(id=${feedback.id})}" class="btn btn-danger btn-sm m-1" onclick="return confirm('Are you sure?')">Delete</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <a href="/feedback/deleteAll" onclick="return confirm('Are you sure to delete all feedbacks?')" class="btn btn-danger btn-sm m-1" >Delete All</a>
+
+                    </div>
+                </div>
+            </div>
+            <!-- Feedback Table End -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- Footer Start -->
+            <div class="container-fluid pt-4 px-4">
+                <div class="bg-secondary rounded-top p-4">
+                    <div class="row">
+                        <div class="col-12 col-sm-6 text-center text-sm-start">
+                            &copy; <a href="#">My Digital</a>, All Right Reserved. 
+                        </div>
+                        <div class="col-12 col-sm-6 text-center text-sm-end">
+                            Designed By My Digital
+                            <br>Distributed By: My Digital
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Footer End -->
+        </div>
+        <!-- Content End -->
+
+        <!-- Back to Top -->
+        <a href="#" class="btn btn-lg btn-primary btn-lg-square back-to-top"><i class="bi bi-arrow-up"></i></a>
+    </div>
+
+    <!-- JavaScript Libraries -->
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0/dist/js/bootstrap.bundle.min.js"></script>
+    
+    <!-- Template Javascript -->
+    <script src="js/main.js"></script>
+</body>
+
+</html> 

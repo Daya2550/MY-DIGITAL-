@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Merchant Products</title>
+</head>
+<body>
+
+    <h2 th:text="'Products for Merchant: ' + ${merchant.mName}"></h2>
+
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Product Name</th>
+                <th>Charges</th>
+                <th>Final Price</th>
+                <th>Weight</th>
+                <th>Variety</th>
+                <th>Quantity</th>
+                <th>Farmer Name</th>
+                <th>Date</th>
+                <th>Remark</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="product : ${products}">
+                <td th:text="${product.productname}"></td>  <!-- Ensure correct field name -->
+                <td th:text="${product.charges}"></td>
+                <td th:text="${product.finalPrice}"></td>
+                <td th:text="${product.weight}"></td>
+                <td th:text="${product.variety}"></td>
+                <td th:text="${product.quantity}"></td>
+                <td th:text="${product.farmerName}"></td>
+                <td th:text="${product.date}"></td>
+                <td th:text="${product.remark}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <br>
+    <a href="/products/new?merchantId=" th:href="@{/products/new(merchantId=${merchant.id})}">Add New Product</a>
+
+</body>
+</html>

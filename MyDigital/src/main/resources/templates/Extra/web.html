@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Food Prices in Mumbai</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 40px;
+            max-width: 1200px;
+        }
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: #343a40;
+        }
+        .btn-custom {
+            background-color: #007bff;
+            color: white;
+            font-size: 1.1rem;
+            font-weight: bold;
+        }
+        .btn-custom:hover {
+            background-color: #0056b3;
+        }
+        table {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 30px;
+            width: 100%;
+        }
+        th, td {
+            text-align: center;
+            padding: 12px;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        td {
+            background-color: #ffffff;
+        }
+        tr {
+            border: none;
+        }
+        
+        /* Scrollable container */
+        .table-wrapper {
+            width: 300px;       /* Fixed width */
+            height: 750px;      /* Fixed height */
+            overflow: auto;     /* Add scrollbars when necessary */
+           position: relative; /*
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+            .table th, .table td {
+                padding: 8px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+      
+        <!-- Scrollable Table -->
+        <div class="table-wrapper">
+            <div class="container" >
+                <h1 class="text-center">Food Prices in Mumbai</h1>
+        
+                <!-- Scrape Data Button -->
+                <div class="text-center">
+                    <form action="/web/scrape" method="post">
+                        <button type="submit" class="btn btn-custom btn-lg">Refresh</button>
+                    </form>
+                </div>
+
+            <table class="table table-striped table-bordered mt-4">
+                <thead>
+                    <tr>
+                        <th>Item</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="data : ${tableData}">
+                        <td th:text="${data}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- Bootstrap and JS Libraries -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

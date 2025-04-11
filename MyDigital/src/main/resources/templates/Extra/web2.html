@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Data</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f8f9fa;
+        }
+        .container {
+            margin-top: 40px;
+        }
+        h1 {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #343a40;
+        }
+        .table {
+            margin-top: 30px;
+            background-color: #ffffff;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        td {
+            text-align: center;
+        }
+        .error-message {
+            color: red;
+            text-align: center;
+            font-size: 1.1rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="text-center">Weather Data Across Major Cities</h1>
+
+        <!-- Show error message if scraping fails -->
+        <div th:if="${error}" class="error-message">
+            <p th:text="${error}"></p>
+        </div>
+
+        <!-- Show table if weather data is available -->
+        <div th:if="${weatherData}">
+            <table class="table table-striped table-bordered">
+                <thead>
+                    <tr>
+                        <th>City</th>
+                        <th>Weather Condition</th>
+                        <th>Temperature</th>
+                        <th>Wind Direction</th>
+                        <th>Wind Speed</th>
+                        <th>Humidity</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="weather : ${weatherData}">
+                        <td th:text="${weather.cityName}"></td>
+                        <td th:text="${weather.weatherCondition}"></td>
+                        <td th:text="${weather.temperature}"></td>
+                        <td th:text="${weather.windDirection}"></td>
+                        <td th:text="${weather.windSpeed}"></td>
+                        <td th:text="${weather.humidity}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Button to refresh data -->
+        <div class="text-center">
+            <a href="/web/scrape" class="btn btn-primary btn-lg">Refresh Data</a>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
